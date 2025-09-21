@@ -1,0 +1,318 @@
+# CivicReport - System Requirements and Dependencies
+
+## System Requirements
+
+### Development Environment
+- **Node.js**: >= 20.0.0
+- **npm**: >= 10.0.0
+- **Python**: >= 3.9 (for some React Native tools)
+- **Java**: JDK 11+ (for Android development)
+- **Ruby**: >= 2.7 (for iOS development on macOS)
+
+### Operating System Support
+- **Windows**: 10/11 (64-bit)
+- **macOS**: 10.15+ (for iOS development)
+- **Linux**: Ubuntu 20.04+ or equivalent
+
+### Mobile Development Prerequisites
+
+#### Android Development
+- Android Studio 2022.3.1+
+- Android SDK API Level 33+
+- Android NDK (latest)
+- Android SDK Build-Tools 33.0.0+
+- Android Emulator or physical device
+
+#### iOS Development (macOS only)
+- Xcode 14.0+
+- iOS Simulator or physical device
+- CocoaPods 1.11.0+
+- Command Line Tools for Xcode
+
+### Database Requirements
+- **PostgreSQL**: 15.0+
+- **PostGIS Extension**: 3.3+
+- **Redis**: 7.0+
+
+### Cloud Services Requirements
+- **AWS Account** with the following services:
+  - EKS (Kubernetes)
+  - RDS (PostgreSQL)
+  - ElastiCache (Redis)
+  - S3 (Storage)
+  - CloudFront (CDN)
+  - ALB (Load Balancer)
+- **Firebase Project** for authentication
+- **OpenAI API Key** for AI image analysis
+- **Google Maps API Key** for location services
+- **Twitter API Keys** for social media integration
+
+## Backend Dependencies (Node.js)
+
+### Core Framework
+- @nestjs/core: ^10.3.2
+- @nestjs/common: ^10.3.2
+- @nestjs/platform-express: ^10.3.2
+
+### Database & ORM
+- typeorm: ^0.3.20
+- pg: ^8.11.3 (PostgreSQL driver)
+- redis: ^4.6.13
+
+### Authentication & Security
+- @nestjs/jwt: ^10.2.0
+- @nestjs/passport: ^10.0.3
+- passport-jwt: ^4.0.1
+- firebase-admin: ^12.0.0
+- bcryptjs: ^2.4.3
+- helmet: ^7.1.0
+
+### Queue System
+- @nestjs/bull: ^10.1.0
+- bull: ^4.12.2
+
+### API Documentation
+- @nestjs/swagger: ^7.3.0
+
+### File Processing
+- multer: ^1.4.5-lts.1
+- sharp: ^0.33.2
+
+### External Services
+- openai: ^4.28.0
+- aws-sdk: ^2.1564.0
+- twitter-api-v2: ^1.17.2
+- axios: ^1.6.7
+
+### PDF & QR Generation
+- pdfkit: ^0.15.0
+- qrcode: ^1.5.3
+
+### Logging & Monitoring
+- winston: ^3.12.0
+
+### Development & Testing
+- @nestjs/testing: ^10.3.2
+- jest: ^29.7.0
+- supertest: ^6.3.4
+- ts-jest: ^29.1.2
+
+## Mobile App Dependencies (React Native)
+
+### Core Framework
+- react: 18.2.0
+- react-native: 0.73.4
+
+### Navigation
+- @react-navigation/native: ^6.1.14
+- @react-navigation/native-stack: ^6.9.22
+- @react-navigation/bottom-tabs: ^6.5.16
+
+### State Management
+- @reduxjs/toolkit: ^2.2.1
+- react-redux: ^9.1.0
+- redux-persist: ^6.0.0
+
+### Storage
+- @react-native-async-storage/async-storage: ^1.21.0
+- react-native-encrypted-storage: ^4.0.3
+
+### Location & Camera
+- @react-native-community/geolocation: ^3.2.1
+- react-native-vision-camera: ^3.8.2
+- react-native-image-picker: ^7.1.0
+
+### Permissions
+- react-native-permissions: ^4.1.4
+
+### Networking
+- axios: ^1.6.7
+
+### UI Components
+- react-native-vector-icons: ^10.0.3
+- react-native-linear-gradient: ^2.8.3
+- react-native-svg: ^14.1.0
+
+### QR Code & Sharing
+- react-native-qrcode-scanner: ^1.5.5
+- react-native-qrcode-svg: ^6.3.0
+- react-native-share: ^10.0.2
+
+### Notifications & Toast
+- react-native-toast-message: ^2.2.0
+
+### Device Info
+- react-native-device-info: ^10.13.1
+
+## Infrastructure Requirements
+
+### Kubernetes Cluster
+- **Version**: 1.28+
+- **Node Groups**: 
+  - API Nodes: t3.medium (2-10 instances)
+  - Worker Nodes: t3.large (1-5 instances)
+- **Storage**: GP3 SSD volumes
+- **Network**: VPC with public/private subnets
+
+### Database Configuration
+- **RDS PostgreSQL**: 
+  - Instance Class: db.r5.large
+  - Multi-AZ: Yes
+  - Storage: 100GB GP3 (auto-scaling enabled)
+  - Backup Retention: 7 days
+  - Encryption: AES-256
+
+### Cache Configuration
+- **ElastiCache Redis**:
+  - Node Type: cache.t3.micro (2 nodes)
+  - Cluster Mode: Enabled
+  - Backup: Daily snapshots
+
+### Storage Configuration
+- **S3 Buckets**:
+  - Images: Private with presigned URLs
+  - Certificates: Public with CloudFront CDN
+  - Backups: Private with lifecycle policies
+
+## API Keys and Configuration
+
+### Required API Keys
+```bash
+# OpenAI (for AI image analysis)
+OPENAI_API_KEY=sk-your-openai-key
+
+# Google Maps (for location services)
+GOOGLE_MAPS_API_KEY=AIzaSyBOti4mM-6x9WDn...
+
+# Twitter API (for social media posting)
+TWITTER_API_KEY=your-twitter-api-key
+TWITTER_API_SECRET=your-twitter-api-secret
+TWITTER_ACCESS_TOKEN=your-access-token
+TWITTER_ACCESS_TOKEN_SECRET=your-access-token-secret
+
+# Firebase (for authentication)
+FIREBASE_PROJECT_ID=civic-report-firebase
+FIREBASE_CLIENT_EMAIL=firebase-service@project.iam...
+FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----...
+
+# AWS (for cloud services)
+AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG...
+AWS_REGION=us-east-1
+AWS_S3_BUCKET=civic-report-images
+```
+
+## Performance Requirements
+
+### Server Specifications (Production)
+- **CPU**: 2+ cores per API instance
+- **RAM**: 2GB+ per API instance
+- **Storage**: 20GB+ per instance
+- **Network**: 1Gbps+
+
+### Database Performance
+- **Connections**: 200 max concurrent
+- **IOPS**: 3000+ for RDS instance
+- **Memory**: 8GB+ for optimal performance
+
+### Mobile App Requirements
+- **RAM**: 3GB+ recommended
+- **Storage**: 1GB available space
+- **Network**: 3G/4G/5G or WiFi
+- **OS**: 
+  - Android 8.0+ (API level 26+)
+  - iOS 12.0+
+
+## Security Requirements
+
+### SSL/TLS Certificates
+- Let's Encrypt certificates via cert-manager
+- Minimum TLS 1.3 for all communications
+
+### Network Security
+- VPC with private subnets for databases
+- Security groups with minimal required ports
+- NAT Gateway for outbound internet access
+
+### Data Protection
+- Encryption at rest (AES-256)
+- Encryption in transit (TLS 1.3)
+- Regular security patches and updates
+
+## Monitoring and Logging
+
+### Required Tools
+- **Metrics**: Prometheus + Grafana
+- **Logging**: ELK Stack (Elasticsearch, Logstash, Kibana)
+- **APM**: DataDog or New Relic
+- **Alerting**: AlertManager + Slack/PagerDuty
+
+### Health Checks
+- Kubernetes liveness and readiness probes
+- External monitoring (Pingdom/StatusPage)
+- Database connection monitoring
+
+## Development Tools
+
+### Code Quality
+- ESLint for code linting
+- Prettier for code formatting
+- Husky for git hooks
+- TypeScript strict mode
+
+### Testing Tools
+- Jest for unit testing
+- Supertest for API testing
+- Detox for E2E mobile testing
+- Postman for API testing
+
+### CI/CD Pipeline
+- GitHub Actions or Jenkins
+- Docker registry (ECR/DockerHub)
+- Automated testing and deployment
+
+## Installation Commands
+
+### Install Backend Dependencies
+```bash
+cd backend
+npm install
+```
+
+### Install Mobile Dependencies
+```bash
+cd mobile
+npm install
+# iOS only (macOS)
+cd ios && pod install
+```
+
+### Install Development Tools
+```bash
+npm install -g @nestjs/cli
+npm install -g react-native-cli
+npm install -g @react-native-community/cli
+```
+
+### Docker Installation
+```bash
+# Pull required Docker images
+docker pull postgres:15
+docker pull redis:7-alpine
+docker pull node:20-alpine
+```
+
+## Estimated Resource Usage
+
+### Development Environment
+- **Disk Space**: 5GB+
+- **Memory**: 8GB+ recommended
+- **Network**: Broadband internet required
+
+### Production Environment
+- **Monthly Cost**: $2,700 - $6,500
+- **Traffic**: 100,000+ API requests/day
+- **Storage**: 100GB+ (growing)
+- **Bandwidth**: 1TB+/month
+
+This comprehensive requirements file covers all the dependencies, tools, and configurations needed for the CivicReport project.
