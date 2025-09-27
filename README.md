@@ -1,6 +1,6 @@
 # CivicReport
 
-A production-grade civic infrastructure reporting app with AI-powered analysis and automated social media integration.
+A production-grade civic infrastructure reporting app with AI-powered analysis and automated social media integration
 
 ## 🚀 Overview
 
